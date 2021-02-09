@@ -16,7 +16,11 @@
         android:orientation="vertical"
         android:layout_height="match_parent"
         >
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Selected_RC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_list"/>
 
     </LinearLayout>
     <LinearLayout
@@ -25,47 +29,10 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/umImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:src="@drawable/um"/>
-
-        <ImageView
-            android:id="@+id/doisImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/dois"/>
-
-        <ImageView
-            android:id="@+id/tresImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/tres"/>
-
-        <ImageView
-            android:id="@+id/quatroImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/quatro"/>
-
-        <ImageView
-            android:id="@+id/cincoImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/cinco"/>
-
-        <ImageView
-            android:id="@+id/seisImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:src="@drawable/seis"/>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/noSelected_RC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_list"/>
     </LinearLayout>
 </LinearLayout>

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_list.view.itemRC
 
 class Rc : RecyclerView.Adapter<Rc.Holder>() {
-    val data = mutableListOf<Int>()
+    var data = mutableListOf<Int>()
     var onItemClick: ((Int) -> Unit) = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
