@@ -37,7 +37,8 @@ class MainActivity : AppCompatActivity() {
         tp_cl.setOnDragListener(object : MyOnLDragListener(fun() {
             Log.i("XRL89", "$itemUsed no layout 1")
             adapterSelected.data.add(itemUsed)
-            adapterSelected.data.distinct()
+            val disc = adapterSelected.data.distinct()
+            adapterSelected.data =  disc.toMutableList()
             listUnselected.remove(itemUsed)
             adapterUnSelected.notifyDataSetChanged()
             adapterSelected.notifyDataSetChanged()
