@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/tp_cl"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        >
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bt_cl"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/umImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:src="@drawable/um"/>
+
+        <ImageView
+            android:id="@+id/doisImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/dois"/>
+
+        <ImageView
+            android:id="@+id/tresImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/tres"/>
+
+        <ImageView
+            android:id="@+id/quatroImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/quatro"/>
+
+        <ImageView
+            android:id="@+id/cincoImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/cinco"/>
+
+        <ImageView
+            android:id="@+id/seisImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:src="@drawable/seis"/>
+
+    </LinearLayout>
+</LinearLayout>
