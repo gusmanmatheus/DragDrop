@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             adapterSelected.data.add(itemUsed)
             val disc = adapterSelected.data.distinct()
             adapterSelected.data =  disc.toMutableList()
-            listUnselected.remove(itemUsed)
+            adapterUnSelected.data.remove(itemUsed)
             adapterUnSelected.notifyDataSetChanged()
             adapterSelected.notifyDataSetChanged()
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             if(adapterUnSelected.data.count()<3) {
                 Log.i("XRL89", "$itemUsed no layout 2")
                 adapterUnSelected.data.add(itemUsed)
-                adapterUnSelected.data.distinct()
+                adapterUnSelected.data=  adapterUnSelected.data.distinct().toMutableList()
                 adapterSelected.data.remove(itemUsed)
                 adapterUnSelected.notifyDataSetChanged()
                 adapterSelected.notifyDataSetChanged()
@@ -100,54 +100,31 @@ open class MyOnLDragListener(val uni: () -> Unit) : View.OnDragListener {
             }
 
             DragEvent.ACTION_DRAG_ENTERED -> {
-                v?.setBackgroundColor(
-                    ContextCompat.getColor(
-                        v.context,
-                        R.color.design_default_color_error
-                    )
-                )
+
 
             }
             DragEvent.ACTION_DRAG_LOCATION -> {
-                v?.setBackgroundColor(ContextCompat.getColor(v.context, R.color.black))
+
 
             }
             DragEvent.ACTION_DRAG_EXITED -> {
-                v?.setBackgroundColor(
-                    ContextCompat.getColor(
-                        v.context,
-                        R.color.material_on_primary_disabled
-                    )
-                )
 
 
             }
             DragEvent.ACTION_DROP -> {
                 val view = event.localState as View
-                view.setBackgroundColor(
-                    ContextCompat.getColor(
-                        view.context,
-                        R.color.material_on_primary_disabled
-                    )
-                )
                 val owned = view.parent as ViewGroup
                 owned.removeView(view)
 
                 val container = v as LinearLayout
                 container.addView(view)
-                view.visibility = View.VISIBLE
                 uni()
             }
-
             DragEvent.ACTION_DRAG_ENDED -> {
-                v?.setBackgroundColor(
-                    ContextCompat.getColor(
-                        v.context,
-                        R.color.material_on_primary_disabled
-                    )
-                )
-            }
+                val view = event.localState as View
+                view.visibility = View.VISIBLE
 
+            }
         }
         return true
     }
