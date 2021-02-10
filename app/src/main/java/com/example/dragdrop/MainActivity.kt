@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -20,8 +21,6 @@ import kotlinx.android.synthetic.main.activity_main.tp_cl
 class MainActivity : AppCompatActivity() {
     var itemUsed = 0
 
-    val listSelected = mutableListOf<Int>(1, 2, 3, 4, 5, 6)
-    val listUnselected = mutableListOf<Int>()
     private val adapterSelected = Rc()
     private val adapterUnSelected = Rc()
 
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         adapterUnSelected.onItemClick = { num ->
             itemUsed = num
         }
-        tp_cl.setOnDragListener(object : MyOnLDragListener(fun() {
+        tp_cl.setOnDragListener(object : MyOnLDragListener( {
             Log.i("XRL89", "$itemUsed no layout 1")
             adapterSelected.data.add(itemUsed)
             val disc = adapterSelected.data.distinct()
@@ -45,8 +44,8 @@ class MainActivity : AppCompatActivity() {
 
 
         }) {})
-        bt_cl.setOnDragListener(object : MyOnLDragListener(fun() {
-            if(adapterUnSelected.data.count()<3) {
+        bt_cl.setOnDragListener(object : MyOnLDragListener( {
+            if(adapterUnSelected.data.count()<=1) {
                 Log.i("XRL89", "$itemUsed no layout 2")
                 adapterUnSelected.data.add(itemUsed)
                 adapterUnSelected.data=  adapterUnSelected.data.distinct().toMutableList()
@@ -61,25 +60,23 @@ class MainActivity : AppCompatActivity() {
     private fun setAdapters(){
         noSelected_RC.layoutManager = LinearLayoutManager(this)
         noSelected_RC.adapter = adapterUnSelected
-        adapterUnSelected.data = listUnselected
+        adapterUnSelected.data = mutableListOf()
         adapterUnSelected.notifyDataSetChanged()
 
         Selected_RC.layoutManager = LinearLayoutManager(this)
         Selected_RC.adapter = adapterSelected
-        adapterSelected.data = listSelected
+        adapterSelected.data =  mutableListOf<Int>(1, 2, 3, 4, 5, 6)
         adapterSelected.notifyDataSetChanged()
 
     }
 }
 
-//
-//
-open class MyOnLongClickListener(val uni: () -> Unit) : View.OnLongClickListener {
+
+
+open class MyOnLongClickListener(open val uni: () -> Unit) : View.OnLongClickListener {
     override fun onLongClick(v: View): Boolean {
         val data = ClipData.newPlainText("simple_text", "text")
         val sb = View.DragShadowBuilder(v)
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             v.startDragAndDrop(data, sb, v, 0)
@@ -91,7 +88,6 @@ open class MyOnLongClickListener(val uni: () -> Unit) : View.OnLongClickListener
         return true
     }
 }
-
 open class MyOnLDragListener(val uni: () -> Unit) : View.OnDragListener {
     override fun onDrag(v: View?, event: DragEvent?): Boolean {
         when (event?.action) {
@@ -111,7 +107,7 @@ open class MyOnLDragListener(val uni: () -> Unit) : View.OnDragListener {
 
 
             }
-            DragEvent.ACTION_DROP -> {
+            DragEvent.ACTION_DROP -> {//penutino
                 val view = event.localState as View
                 val owned = view.parent as ViewGroup
                 owned.removeView(view)
@@ -120,7 +116,7 @@ open class MyOnLDragListener(val uni: () -> Unit) : View.OnDragListener {
                 container.addView(view)
                 uni()
             }
-            DragEvent.ACTION_DRAG_ENDED -> {
+            DragEvent.ACTION_DRAG_ENDED -> {//pos
                 val view = event.localState as View
                 view.visibility = View.VISIBLE
 
