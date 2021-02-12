@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="2"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/tp_cl"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:background="@color/teal_200"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Selected_RC"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_list"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecSelected"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="3"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_app" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/bt_cl"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:background="@color/purple_200"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/noSelected_RC"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_list"/>
-    </LinearLayout>
-</LinearLayout>
+    <View
+        android:id="@+id/mainSeparator"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="#444444"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainRecSelected" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecAvailable"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainSeparator"
+        app:spanCount="3"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_app" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
