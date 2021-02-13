@@ -12,6 +12,7 @@ class OnDragAndDropListener {
         private var _actionDragLocation: (View) -> Unit = {}
         private var _actionDragStarted: (View) -> Unit = {}
         private var _actionDrop: (View) -> Unit = {}
+        private var _dropListener: (ViewPosition) -> Unit = {}
 
         fun setActionDragStarted(action: (View) -> Unit): Builder {
             _actionDragStarted = action
@@ -43,6 +44,11 @@ class OnDragAndDropListener {
             return this
         }
 
+        fun setDropListener(action: (ViewPosition) -> Unit): Builder {
+            _dropListener = action
+            return this
+        }
+
         fun build(): View.OnDragListener {
             return View.OnDragListener { view, event ->
                 when (event?.action) {
@@ -57,7 +63,7 @@ class OnDragAndDropListener {
                     }
 
                     DragEvent.ACTION_DRAG_ENDED -> {
-                        view.tag = Point(event.x, event.y)
+                        _dropListener(ViewPosition(view, event.x, event.y))
                         _actionDragEnded(view)
                     }
 

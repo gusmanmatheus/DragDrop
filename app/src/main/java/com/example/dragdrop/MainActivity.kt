@@ -14,10 +14,6 @@ class MainActivity : AppCompatActivity() {
 
         mainRecAvailable.adapter = AvailableAdapter().apply {
             data = List(6) { it }
-
-            setDropListener {
-
-            }
         }
 
         mainSeparator.setOnClickListener {

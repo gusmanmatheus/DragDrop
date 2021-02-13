@@ -18,7 +18,7 @@ class AvailableAdapter : RecyclerView.Adapter<AvailableAdapter.Holder>() {
             notifyDataSetChanged()
         }
 
-    private var dropListener: (View) -> Unit = {}
+    private var dropListener: (ViewPosition) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_app, parent, false)
@@ -33,7 +33,7 @@ class AvailableAdapter : RecyclerView.Adapter<AvailableAdapter.Holder>() {
         holder.bind(position)
     }
 
-    fun setDropListener(listener: (View) -> Unit) {
+    fun setDropListener(listener: (ViewPosition) -> Unit) {
         dropListener = listener
     }
 
@@ -44,8 +44,9 @@ class AvailableAdapter : RecyclerView.Adapter<AvailableAdapter.Holder>() {
                 }
                 .setActionDragEnded {
                     it.isVisible = true
-                    dropListener(it)
                     it.setOnDragListener { _, _ -> true }
+                }.setDropListener {
+                    dropListener(it)
                 }.build()
 
         init {
