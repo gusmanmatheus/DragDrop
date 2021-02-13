@@ -57,6 +57,7 @@ class OnDragAndDropListener {
                     }
 
                     DragEvent.ACTION_DRAG_ENDED -> {
+                        view.tag = Point(event.x, event.y)
                         _actionDragEnded(view)
                     }
 

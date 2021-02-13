@@ -18,6 +18,8 @@ class AvailableAdapter : RecyclerView.Adapter<AvailableAdapter.Holder>() {
             notifyDataSetChanged()
         }
 
+    private var dropListener: (View) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_app, parent, false)
         return Holder(view)
@@ -31,41 +33,42 @@ class AvailableAdapter : RecyclerView.Adapter<AvailableAdapter.Holder>() {
         holder.bind(position)
     }
 
-    class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setDropListener(listener: (View) -> Unit) {
+        dropListener = listener
+    }
+
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private fun createOnDragListener() = OnDragAndDropListener.Builder()
-            .setActionDragEntered {
-                Log.i(TAG, "setActionDragEntered")
-                it.visibility = View.INVISIBLE
-            }
-            .setActionDragEnded {
-                it.isVisible = true
-                it.setOnDragListener { view, dragEvent -> true }
-            }.build()
+                .setActionDragEntered {
+                    it.visibility = View.INVISIBLE
+                }
+                .setActionDragEnded {
+                    it.isVisible = true
+                    dropListener(it)
+                    it.setOnDragListener { _, _ -> true }
+                }.build()
 
         init {
-
-
             itemView.setOnLongClickListener {
                 itemView.setOnDragListener(createOnDragListener())
 
-                Log.i(TAG, "long")
                 setupDragShadow(itemView)
 
-                false
+                true
             }
         }
 
         fun bind(position: Int) {
             itemView.iappImgIcon.setImageResource(
-                when (position) {
-                    0 -> R.drawable.um
-                    1 -> R.drawable.dois
-                    2 -> R.drawable.tres
-                    3 -> R.drawable.quatro
-                    4 -> R.drawable.cinco
-                    5 -> R.drawable.seis
-                    else -> R.mipmap.ic_launcher
-                }
+                    when (position) {
+                        0 -> R.drawable.um
+                        1 -> R.drawable.dois
+                        2 -> R.drawable.tres
+                        3 -> R.drawable.quatro
+                        4 -> R.drawable.cinco
+                        5 -> R.drawable.seis
+                        else -> R.mipmap.ic_launcher
+                    }
             )
         }
     }
