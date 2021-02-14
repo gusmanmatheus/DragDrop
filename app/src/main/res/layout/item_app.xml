@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    tools:layout_height="100dp"
-    tools:layout_width="100dp">
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_margin="24dp"
+    tools:layout_height="wrap_content"
+    tools:layout_width="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iappImgIcon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

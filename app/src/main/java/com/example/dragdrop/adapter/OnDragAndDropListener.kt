@@ -3,6 +3,9 @@ package com.example.dragdrop.adapter
 import android.content.ClipDescription
 import android.view.DragEvent
 import android.view.View
+import android.view.ViewGroup
+import android.widget.GridLayout
+import android.widget.LinearLayout
 
 class OnDragAndDropListener {
     class Builder {
@@ -63,7 +66,6 @@ class OnDragAndDropListener {
                     }
 
                     DragEvent.ACTION_DRAG_ENDED -> {
-                        _dropListener(ViewPosition(view, event.x, event.y))
                         _actionDragEnded(view)
                     }
 
@@ -76,11 +78,14 @@ class OnDragAndDropListener {
                     }
 
                     DragEvent.ACTION_DROP -> {
+                        val ev = event.localState as View
+                        _dropListener(ViewPosition(view, ev))
+
                         _actionDrop(view)
                     }
                 }
 
-                false
+                true
             }
         }
     }
